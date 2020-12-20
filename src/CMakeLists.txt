@@ -133,8 +133,13 @@ if (BUILD_SHARED_LIBS)
   )
 endif()
 
-source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}" PREFIX "src" FILES ${BOX2D_SOURCE_FILES})
-source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}/../include" PREFIX "include" FILES ${BOX2D_HEADER_FILES})
+if (${CMAKE_VERSION} VERSION_EQUAL "3.8.0" OR ${CMAKE_VERSION} VERSION_GREATER "3.8.0") 
+	source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}" PREFIX "src" FILES ${BOX2D_SOURCE_FILES})
+	source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}/../include" PREFIX "include" FILES ${BOX2D_HEADER_FILES})
+else()
+	source_group("src" FILES ${BOX2D_SOURCE_FILES})
+	source_group("include" FILES ${BOX2D_HEADER_FILES})
+endif()
 
 install(
   TARGETS box2d
