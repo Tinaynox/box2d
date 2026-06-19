@@ -24,7 +24,9 @@ elseif (UNIX)
         list(APPEND glfw_LIBRARIES "${CMAKE_DL_LIBS}")
     endif()
 
-    find_package(X11 REQUIRED)
+	if (NOT EMSCRIPTEN)
+		find_package(X11 REQUIRED)
+	endif()
 
     # Set up library and include paths
     list(APPEND glfw_INCLUDE_DIRS "${X11_X11_INCLUDE_PATH}")
